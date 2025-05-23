@@ -1,0 +1,325 @@
+/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+:root {
+    --bs-primary: #0056b3; /* Deeper blue */
+    --bs-primary-rgb: 0, 86, 179;
+    --bs-secondary: #6c757d;
+    --bs-success: #198754;
+    --bs-info: #0dcaf0;
+    --bs-warning: #ffc107;
+    --bs-danger: #dc3545;
+    --bs-light: #f8f9fa; /* Light background */
+    --bs-dark: #212529; /* Dark text/elements */
+    --bs-body-font-family: 'Inter', sans-serif;
+    --bs-body-bg: var(--bs-light);
+    --bs-link-hover-decoration: none;
+    
+    /* Custom blue theme colors */
+    --blue-light: #e6f2ff;
+    --blue-medium: #4d94ff;
+    --blue-dark: #003d7a;
+}
+
+html {
+    font-size: 14px;
+    position: relative;
+    min-height: 100%;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+body {
+    font-family: var(--bs-body-font-family);
+    color: var(--bs-dark);
+    background-color: var(--bs-body-bg);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding-top: 0; /* Remove if navbar becomes fixed-top and you handle padding on body */
+}
+
+main {
+    flex: 1 0 auto;
+}
+
+/* Fade-in animation */
+.fade-in {
+    animation: fadeInAnimation ease 0.5s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fadeInAnimation {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Navbar adjustments */
+.navbar-brand img {
+    transition: transform 0.3s ease-in-out;
+}
+
+.navbar-brand:hover img {
+    transform: rotate(10deg) scale(1.1);
+}
+
+.nav-link {
+    transition: color 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+.navbar-dark .nav-link:hover,
+.navbar-dark .nav-link:focus {
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.navbar {
+    background-color: var(--blue-light) !important;
+}
+
+.navbar-light .navbar-brand {
+    color: var(--bs-primary);
+}
+
+.navbar-light .nav-item .nav-link {
+    color: var(--blue-dark) !important;
+}
+
+.navbar-light .nav-item .nav-link:hover {
+    color: var(--bs-primary) !important;
+    background-color: rgba(0, 86, 179, 0.1);
+}
+
+.dropdown-menu {
+    border-radius: 0.5rem;
+    border: 1px solid rgba(0, 86, 179, 0.2);
+}
+
+.dropdown-item.active, 
+.dropdown-item:active {
+    background-color: var(--bs-primary);
+}
+
+/* Buttons */
+.btn {
+    border-radius: 0.375rem; /* Bootstrap 5 default */
+    padding: 0.5rem 1rem;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: var(--bs-primary);
+    border-color: var(--blue-dark);
+}
+
+.btn-primary:hover {
+    background-color: var(--blue-dark);
+    border-color: var(--blue-dark);
+    opacity: 0.95;
+}
+
+.btn-outline-primary {
+    color: var(--bs-primary);
+    border-color: var(--bs-primary);
+}
+.btn-outline-primary:hover {
+    background-color: var(--bs-primary);
+    color: white;
+}
+
+/* Cards */
+.card {
+    border-radius: 0.5rem;
+    border: 1px solid #dee2e6;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.card:hover {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+    background-color: var(--blue-light);
+    border-bottom: 1px solid rgba(0, 86, 179, 0.2);
+}
+
+/* Forms */
+.form-control,
+.form-select {
+    border-radius: 0.375rem;
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.form-control:focus,
+.form-select:focus {
+    border-color: var(--bs-primary);
+    box-shadow: 0 0 0 0.25rem rgba(var(--bs-primary-rgb), 0.25);
+}
+
+/* Footer */
+.footer {
+    background-color: var(--blue-dark);
+    color: #e6f2ff;
+    padding: 1.5rem 0;
+    font-size: 0.9rem;
+}
+
+.footer a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    text-decoration: underline;
+}
+
+/* Tables (e.g., DataTables) */
+.table {
+    margin-bottom: 1rem;
+    color: var(--bs-dark);
+}
+
+.table th,
+.table td {
+    vertical-align: middle;
+}
+
+.table thead th {
+    background-color: var(--blue-light);
+    border-bottom: 2px solid var(--blue-medium);
+}
+
+/* Utility classes */
+.text-primary {
+    color: var(--bs-primary) !important;
+}
+
+/* Toastr Notifications - ensure they are visible over dark navbar if needed */
+.toast-success {
+    background-color: #198754 !important;
+}
+.toast-error {
+    background-color: #dc3545 !important;
+}
+.toast-info {
+    background-color: var(--bs-info) !important;
+}
+.toast-warning {
+    background-color: var(--bs-warning) !important;
+}
+
+/* Login Partial adjustments */
+#logoutForm .nav-link {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .navbar-brand {
+        font-size: 1.1rem;
+    }
+    .navbar-brand img {
+        height: 25px;
+    }
+}
+
+/* Specific for Shopping Cart Component in Navbar */
+.navbar .nav-item a.nav-link i.bi-cart3 {
+    font-size: 1.2rem; /* Make cart icon slightly larger */
+}
+
+.navbar .nav-item a.nav-link .badge {
+    font-size: 0.7em; /* Adjust badge size if needed */
+    padding: 0.3em 0.5em;
+    position: relative;
+    top: -10px;
+    right: -3px;
+}
+
+/* Custom styles */
+.dropdown-item:active {
+    background-color: var(--bs-primary);
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+.custom-card {
+    transition: all 0.3s;
+}
+
+.custom-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.navbar .nav-item .nav-link {
+    padding: 0.5rem 1rem;
+}
+
+.book-image {
+    max-height: 200px;
+    object-fit: contain;
+}
+
+/* DataTables customization */
+.dataTables_wrapper .dataTables_filter input {
+    margin-left: 0.5em;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    padding: 0.25rem 0.5rem;
+}
+
+.dataTables_wrapper .dataTables_length select {
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    padding: 0.25rem 1.5rem 0.25rem 0.5rem;
+}
+
+button.accept-policy {
+    font-size: 1rem;
+    line-height: inherit;
+}
+
+a.navbar-brand {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+}
+
+/* Provide sufficient contrast against white background */
+a {
+    color: #0366d6;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: #fff;
+    background-color: var(--bs-primary);
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+.border-top {
+    border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}

@@ -1,0 +1,154 @@
+﻿@model ProductVM
+
+<div class="container-fluid px-4">
+    <div class="card shadow border-0 rounded-4 my-4">
+        <div class="card-header bg-primary bg-gradient py-3">
+            <div class="row align-items-center">
+                <div class="col">
+                    <h2 class="text-white m-0 fw-bold">
+                        <i class="bi bi-pencil-square me-2"></i>@(Model.Product.Id != 0 ? "Chỉnh sửa" : "Thêm mới") sản phẩm
+                    </h2>
+                </div>
+            </div>
+        </div>
+        <div class="card-body p-4">
+            <form method="post" class="row" enctype="multipart/form-data">
+                <input asp-for="Product.Id" hidden />
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="card border-0 shadow-sm mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title mb-4">Thông tin cơ bản</h5>
+                                <div class="mb-4">
+                                    <label asp-for="Product.Title" class="form-label"></label>
+                                    <input asp-for="Product.Title" class="form-control" placeholder="Nhập tiêu đề sản phẩm" />
+                                    <span asp-validation-for="Product.Title" class="text-danger"></span>
+                                </div>
+                                <div class="mb-4">
+                                    <label asp-for="Product.Description" class="form-label"></label>
+                                    <textarea asp-for="Product.Description" class="form-control" rows="4" placeholder="Nhập mô tả sản phẩm"></textarea>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
+                                        <label asp-for="Product.ISBN" class="form-label"></label>
+                                        <input asp-for="Product.ISBN" class="form-control" placeholder="Nhập mã ISBN" />
+                                        <span asp-validation-for="Product.ISBN" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+                                        <label asp-for="Product.Author" class="form-label"></label>
+                                        <input asp-for="Product.Author" class="form-control" placeholder="Nhập tên tác giả" />
+                                        <span asp-validation-for="Product.Author" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card border-0 shadow-sm mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title mb-4">Thông tin giá</h5>
+                                <div class="row">
+                                    <div class="col-md-6 mb-4">
+                                        <label asp-for="Product.ListPrice" class="form-label"></label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">₫</span>
+                                            <input asp-for="Product.ListPrice" class="form-control" placeholder="0" />
+                                        </div>
+                                        <span asp-validation-for="Product.ListPrice" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+                                        <label asp-for="Product.Price" class="form-label"></label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">₫</span>
+                                            <input asp-for="Product.Price" class="form-control" placeholder="0" />
+                                        </div>
+                                        <span asp-validation-for="Product.Price" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+                                        <label asp-for="Product.Price50" class="form-label">Giá số lượng lớn (50+)</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">₫</span>
+                                            <input asp-for="Product.Price50" class="form-control" placeholder="0" />
+                                        </div>
+                                        <span asp-validation-for="Product.Price50" class="text-danger"></span>
+                                    </div>
+                                    <div class="col-md-6 mb-4">
+                                        <label asp-for="Product.Price100" class="form-label">Giá số lượng lớn (100+)</label>
+                                        <div class="input-group">
+                                            <span class="input-group-text">₫</span>
+                                            <input asp-for="Product.Price100" class="form-control" placeholder="0" />
+                                        </div>
+                                        <span asp-validation-for="Product.Price100" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card border-0 shadow-sm mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title mb-4">Danh mục & Hình ảnh</h5>
+                                <div class="mb-4">
+                                    <label asp-for="Product.CategoryId" class="form-label"></label>
+                                    <select asp-for="@Model.Product.CategoryId" asp-items="@Model.CategoryList" class="form-select">
+                                        <option disabled selected>--Chọn danh mục--</option>
+                                    </select>
+                                    <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
+                                </div>
+                                <div class="mb-4">
+                                    <label class="form-label">Hình ảnh sản phẩm</label>
+                                    <input type="file" name="files" class="form-control" multiple />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        @if (Model.Product.ProductImages != null)
+                        {
+                            <div class="card border-0 shadow-sm">
+                                <div class="card-body">
+                                    <h5 class="card-title mb-4">Hình ảnh hiện tại</h5>
+                                    @foreach (var image in Model.Product.ProductImages)
+                                    {
+                                        <div class="position-relative mb-3">
+                                            <img src="@image.ImageUrl" class="img-fluid rounded" style="width: 100%; object-fit: cover;" />
+                                            <a asp-action="DeleteImage" asp-route-imageId="@image.Id" 
+                                               class="btn btn-sm btn-danger position-absolute top-0 end-0 m-2">
+                                                <i class="bi bi-trash-fill"></i>
+                                            </a>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <div class="col-12">
+                        <div class="d-flex gap-3 justify-content-end">
+                            <a asp-controller="Product" asp-action="Index" class="btn btn-outline-secondary px-4">
+                                <i class="bi bi-arrow-left me-2"></i>Quay lại danh sách
+                            </a>
+                            <button type="submit" class="btn btn-primary px-4">
+                                <i class="bi bi-save me-2"></i>@(Model.Product.Id != 0 ? "Cập nhật" : "Tạo mới")
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#Description'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
+}

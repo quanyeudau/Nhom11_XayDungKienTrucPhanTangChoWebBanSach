@@ -1,0 +1,40 @@
+﻿@model List<Product>
+
+<div class="container-fluid px-4">
+    <div class="card shadow border-0 rounded-4 my-4">
+        <div class="card-header bg-primary bg-gradient py-3">
+            <div class="row align-items-center">
+                <div class="col">
+                    <h2 class="text-white m-0 fw-bold">
+                        <i class="bi bi-book me-2"></i>Quản lý sản phẩm
+                    </h2>
+                </div>
+                <div class="col text-end">
+                    <a asp-controller="Product" asp-action="Upsert" class="btn btn-light">
+                        <i class="bi bi-plus-circle me-2"></i>Thêm sản phẩm mới
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="card-body p-4">
+            <div class="table-responsive">
+                <table id="tblData" class="table table-hover" style="width:100%">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Tên sách</th>
+                            <th>ISBN</th>
+                            <th>Giá</th>
+                            <th>Tác giả</th>
+                            <th>Danh mục</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/js/product.js"></script>
+}
